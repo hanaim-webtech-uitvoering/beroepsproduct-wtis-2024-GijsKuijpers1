@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+if (isset($_SESSION['keren_bezocht'])) {
+    $_SESSION['keren_bezocht']++;
+} else {
+    $_SESSION['keren_bezocht'] = 1;
+}
+
+print_r($_SESSION);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,17 +56,15 @@
                 </div>
             </li>
             <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
-            <li> <a href="profiel.php"><img src="img/user.png" height="20" alt="profiel"></a></li>
+           
             <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
                         alt="winkelmandje"></a></li>
         </ul>
     </nav>
 
-
-
     <h1 class="pizzafont">inloggen</h1>
     <div class="inlogpagina">
-        <form action="pizza.php">
+        <form action="aanmelden.php">
             <div class="inlog-item">
                 <label for="email">email</label>
                 <input id="email" name="email" type="email" required>

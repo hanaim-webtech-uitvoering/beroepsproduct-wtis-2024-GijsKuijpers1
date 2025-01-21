@@ -1,3 +1,8 @@
+<?php
+require_once() /* voor je functies */
+$filter = isset($_get['filter']) ? trim($_GET['filter']) : null;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
