@@ -1,3 +1,41 @@
+<?php
+    require_once 'db_connectie.php';
+
+    $melding = ''; 
+
+    if(isset($_POST['submit'])) {
+
+        $gebruikersnaam = $_POST['gebruikersnaam'];
+        $wachtwoord  = $_POST['wachtwoord'];
+
+        $db = maakVerbinding();
+
+        $sql = 'SELECT [password]
+                FROM [User]
+                WHERE username = :naam';
+        $query = $db->prepare($sql);
+
+        $query->execute([':naam' => $gebruikersnaam]);
+    
+        if ($rij = $query->fetch()) {
+            //gebruiker gevonden
+            $passwordhash = $rij['password'];
+    
+            //wachtwoord checken
+            if (password_verify($wachtwoord, $passwordhash)) {
+                session_start();
+                //header('location: index.php');
+                $_SESSION['gebruiker'] = $gebruikersnaam;
+                $melding = "{$_SESSION['gebruiker']} is ingelogd";
+            } else {
+                $melding = 'fout: incorrecte wachtwoord!!';
+            }
+        } else {
+            $melding = 'Incorrecte inloggegevens';
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +53,6 @@
 </head>
 
 <body>
-
     <header>
 
         <div class="header-container">
@@ -35,6 +72,7 @@
 
     <nav class="menu">
         <ul class="pizzafont">
+
             <li class="dropdown"> menu ˅
                 <div class="dropdown-content">
                     <a href="index.php">eten</a>
@@ -42,58 +80,34 @@
                 </div>
             </li>
             <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
+           
             <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
                         alt="winkelmandje"></a></li>
         </ul>
     </nav>
 
-
-    <h1 class="pizzafont">registreren</h1>
+    <h1 class="pizzafont">inloggen</h1>
     <div class="inlogpagina">
-        <form action="pizza.php">
+        <form action="aanmelden.php" method="post">
             <div class="inlog-item">
-                <label for="naam">naam</label>
-                <input id="naam" name="naam" type="text" required>
-            </div>
-            <div class="inlog-item">
-                <label for="tussenvoegsel">tussenvoegsel</label>
-                <input id="tussenvoegsel" name="tussenvoegsel" type="text">
-            </div>
-            <div class="inlog-item">
-                <label for="achternaam">achternaam</label>
-                <input id="achternaam" name="achternaam" type="text" required>
-            </div>
-            <div class="inlog-item">
-                <label for="adres">adres</label>
-                <input id="adres" name="adres" type="text" required>
-            </div>
-            <div class="inlog-item">
-                <label for="huisnummer">huisnummer</label>
-                <input id="huisnummer" name="huisnummer" type="text" required>
-            </div>
-
-            <div class="inlog-item">
-                <label for="straat">straat</label>
-                <input id="straat" name="straat" type="text" required>
-            </div>
-            <div class="inlog-item">
-                <label for="woonplaats">woonplaats</label>
-                <input id="woonplaats" name="woonplaats" type="text" required>
-            </div>
-            <div class="inlog-item">
-                <label for="telefoonnummer">telefoonnummer</label>
-                <input id="telefoonnummer" name="telefoonnummer" type="tel" required>
-            </div>
-            <div class="inlog-item">
-                <label for="emailadres">emailadres</label>
-                <input id="emailadres" name="emailadres" type="email" required>
+                <label for="gebruikersnaam">gebruikersnaam</label>
+                <input id="gebruikersnaam" name="gebruikersnaam" type="gebruikersnaam" required>
             </div>
             <div class="inlog-item">
                 <label for="wachtwoord">wachtwoord</label>
-                <input id="wachtwoord" name="wachtwoord" type="password" required>
+                <input id="wachtwoord" name="wachtwoord" type="password">
             </div>
-            <button>registreren</button>
+            <div class="inlog-item">
+            <button type="submit" name="submit">aanmelden</button>
+            </div>
         </form>
+
+
+        <p>anders</p>
+        <a href="registratie.php">
+            <button>registreren</button>
+        </a>
+        <?=$melding?>
     </div>
 </body>
 

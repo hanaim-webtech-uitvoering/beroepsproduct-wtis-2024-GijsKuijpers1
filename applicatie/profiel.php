@@ -20,7 +20,7 @@
         <div class="header-container">
             <div class="left">
                 <ul>
-                    <li class="pizzafont"><a href="index-ingelogd.php">pizzaria</a></li>
+                    <li class="pizzafont"><a href="index.php">pizzaria</a></li>
                 </ul>
             </div>
             <div class="right">
@@ -33,13 +33,13 @@
         <ul class="pizzafont">
             <li class="dropdown"> menu ˅
                 <div class="dropdown-content">
-                    <a href="index-ingelogd.php">eten</a>
-                    <a href="drinkmenu-ingelogd.php">drinken</a>
+                    <a href="index.php">eten</a>
+                    <a href="drinkmenu.php">drinken</a>
                 </div>
             </li>
-            <li> <a href="privacyverklaring-ingelogd.php">privacyverklaring</a></li>
+            <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
 
-            <li class="imagelist"> <a href="winkelmandje-ingelogd.php"><img src="img/shopping-cart.png" height="20"
+            <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
                         alt="winkelmandje"></a></li>
         </ul>
     </nav>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +17,19 @@
         <div class="header-container">
             <div class="left">
                 <ul>
-                    <li class="pizzafont"><a href="index-ingelogd.php">pizzaria</a></li>
+                    <li class="pizzafont"><a href="index.php">pizzaria</a></li>
                 </ul>
             </div>
             <div class="right">
-                <a href="profiel.php"><img src="img/user.png" height="20" alt="profiel"></a>
+                <ul>
+                <?php if(!isset($_SESSION['gebruiker'])): ?>
+                    <li><a href="aanmelden.php">Inloggen</a></li>
+                    <li><a href="registratie.php">Registreren</a></li>
+                    <?php endif; ?>
+                    <?php if(isset($_SESSION['gebruiker'])): ?>
+                    <li><a href="profiel.php"><img src="img/user.png" height="20" alt="profiel"></a></li>
+                    <?php endif; ?>
+                </ul>
             </div>
         </div>
     </header>
@@ -27,13 +38,12 @@
         <ul class="pizzafont">
             <li class="dropdown"> menu ˅
                 <div class="dropdown-content">
-                    <a href="index-ingelogd.php">eten</a>
-                    <a href="drinkmenu-ingelogd.php">drinken</a>
+                    <a href="index.php">eten</a>
+                    <a href="drinkmenu.php">drinken</a>
                 </div>
             </li>
-            <li> <a href="privacyverklaring-ingelogd.php">privacyverklaring</a></li>
-
-            <li class="imagelist"> <a href="winkelmandje-ingelogd.php"><img src="img/shopping-cart.png" height="20"
+            <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
+            <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
                         alt="winkelmandje"></a></li>
         </ul>
     </nav>
@@ -41,10 +51,8 @@
 
     <h1>privacyverklaring</h1>
     <p>
-        pizza & co hecht veel waarde aan de privacy en bescherming van de persoonsgegevens van haar gebruikers. In
-        deze
-        privacyverklaring leggen wij uit welke gegevens we verzamelen, hoe we deze gegevens gebruiken en welke
-        rechten
+        pizza & co hecht veel waarde aan de privacy en bescherming van de persoonsgegevens van haar gebruikers. In deze
+        privacyverklaring leggen wij uit welke gegevens we verzamelen, hoe we deze gegevens gebruiken en welke rechten
         je hebt met betrekking tot je persoonsgegevens.
     </p>
     <ol>
@@ -59,8 +67,7 @@
             <ul>
                 <li>Voor het leveren en verbeteren van onze diensten</li>
                 <li>Voor het afhandelen van je vragen en verzoeken</li>
-                <li>Voor het versturen van nieuwsbrieven en promotionele communicatie (indien je hiervoor
-                    toestemming
+                <li>Voor het versturen van nieuwsbrieven en promotionele communicatie (indien je hiervoor toestemming
                     hebt gegeven)</li>
             </ul>
         </li>

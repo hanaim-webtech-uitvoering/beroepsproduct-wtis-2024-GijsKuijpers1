@@ -1,19 +1,69 @@
+<?php
+include 'include/view/ViewProducten.php';
+include 'include/data/dataProducten.php';
+include 'include/head.php';
+include 'include/sessionSwitch.php';
+include 'include/header.php';
+require_once 'db_connectie.php';
+$db = maakVerbinding();
+session_start();
+$html = '';
+$producttype = 'pizza';
+$producten = dataProducten($producttype, $db);
+$html .= viewProducten($producten);
+$head = UseHead();
+$header = UseHeader();
+$sessionSwitch = sessionSwitch();
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-</head>
+<?=$head?>
+
+<header>
+
+<div class="header-container">
+    <div class="left">
+        <ul>
+            <li class="pizzafont"><a href="index.php">pizzaria</a></li>
+        </ul>
+    </div>
+    <div class="right">
+        <ul>
+        <?=$sessionSwitch?>
+        </ul>
+    </div>
+</div>
+</header>
+
+<nav class="menu">
+<ul class="pizzafont">
+    <li class="dropdown"> menu ˅
+        <div class="dropdown-content">
+            <a href="index.php">eten</a>
+            <a href="drinkmenu.php">drinken</a>
+        </div>
+    </li>
+    <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
+    <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
+                alt="winkelmandje"></a></li>
+</ul>
+</nav>
+
 <body>
-    <h1>It Works!</h1>
-    <?php echo('Hallo WT\'er, de webserver is online en PHP werkt.'); ?>
-    <br>
-    <br>
-    Alle technische informatie over je webserver vind je hier: <a href="phpinfo.php">http://<?=$_SERVER['HTTP_HOST']?>/phpinfo.php</a>
-    <br>
-    <br>
-    Een voorbeeld van een pagina die gegevens uit de database haalt vind je hier: <a href="componist-aantalstukken.php">http://<?=$_SERVER['HTTP_HOST']?>/componist-aantalstukken.php</a>
+
+
+
+    <h1 class="pizzafont"><?=$producttype?></h1>
+  <div class='grid-container'>
+    <?=$html?>
+    </div>
+    
+
+    <footer>Copyright © 2024 Gijs & Co products. All Rights Reserved.</footer>
+
 </body>
+
 </html>
