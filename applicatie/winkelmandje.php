@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['bestel'])) {
         if (isset($_SESSION['winkelmandje']) && !empty($_SESSION['winkelmandje'])) {
             $client_username = $_SESSION['gebruiker'];
-            $personnel_username = 'kaas3';
+            $personnel_username = getRandomPersonnel($db);
             $date = date('Y-m-d H:i:s');
             $state = 0;
             $adress = $_POST['adres'];

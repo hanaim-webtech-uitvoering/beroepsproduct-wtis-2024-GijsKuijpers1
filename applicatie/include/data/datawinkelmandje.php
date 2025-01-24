@@ -42,4 +42,16 @@ function insertOrderProduct($db, $order_id, $product_name, $quantity) {
         ':quantity' => $quantity
     ]);
 }
+function getRandomPersonnel($db) {
+    $sql = "SELECT TOP 1 username 
+            FROM [User]
+            WHERE role = 'personnel' 
+            ORDER BY NEWID()";
+            
+    $query = $db->prepare($sql);
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+    
+    return $result ? $result['username'] : 'kaas3';
+}
 ?>
