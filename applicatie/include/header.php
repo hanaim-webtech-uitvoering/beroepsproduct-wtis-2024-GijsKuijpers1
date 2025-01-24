@@ -12,7 +12,7 @@ function UseHeader() {
     </div>
     <div class="right">
         <ul>
-        <?=$sessionSwitch?>
+        '. sessionSwitch() .'
         </ul>
     </div>
 </div>

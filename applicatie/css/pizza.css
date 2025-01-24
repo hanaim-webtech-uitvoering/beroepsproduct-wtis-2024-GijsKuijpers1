@@ -281,3 +281,47 @@
             text-align: center;
         }
     }
+    .box-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        justify-content: space-evenly;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .box-item1 {
+        flex: 0 1 calc(33.333% - 20px);
+        min-width: 250px;
+        max-width: 350px;
+        background: #fff;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .box-selector1 {
+        margin-bottom: 10px;
+    }
+    .box-selector2{
+        display: flex; 
+        align-items: center; 
+        gap: 10px;
+    }
+
+    .lopende-bestellingen,
+    .geschiedenis {
+        background: #fff;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .box-item {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 4px;
+    }

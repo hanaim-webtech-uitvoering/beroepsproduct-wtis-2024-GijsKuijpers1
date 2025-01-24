@@ -1,32 +1,26 @@
 <?php
-    require_once 'db_connectie.php';
+    require_once 'include/db_connectie.php';
+    include 'include/head.php';	
+    include 'include/data/dataaanmelden.php';
+    include 'include/checkRol.php';
+    include 'include/sessionSwitch.php';
+    include 'include/header.php';
 
+    $db = maakVerbinding();
     $melding = ''; 
 
+    
     if(isset($_POST['submit'])) {
 
-        $gebruikersnaam = $_POST['gebruikersnaam'];
-        $wachtwoord  = $_POST['wachtwoord'];
-
-        $db = maakVerbinding();
-
-        $sql = 'SELECT [password]
-                FROM [User]
-                WHERE username = :naam';
-        $query = $db->prepare($sql);
-
-        $query->execute([':naam' => $gebruikersnaam]);
+        $gebruikersnaam = htmlSpecialChars($_POST['gebruikersnaam']);
+        $wachtwoord  = htmlspecialchars($_POST['wachtwoord']);
     
-        if ($rij = $query->fetch()) {
-            //gebruiker gevonden
+        if ($rij = getPassword($db, $gebruikersnaam)) {
             $passwordhash = $rij['password'];
-    
-            //wachtwoord checken
             if (password_verify($wachtwoord, $passwordhash)) {
                 session_start();
-                //header('location: index.php');
-                $_SESSION['gebruiker'] = $gebruikersnaam;
-                $melding = "{$_SESSION['gebruiker']} is ingelogd";
+                $rol = getRole($db, $gebruikersnaam);
+              checkRol($rol, $gebruikersnaam);
             } else {
                 $melding = 'fout: incorrecte wachtwoord!!';
             }
@@ -39,52 +33,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="STYLESHEET" href="pizza.css" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <title>pizzaria</title>
-</head>
+<?=UseHead()?>
 
 <body>
-    <header>
-
-        <div class="header-container">
-            <div class="left">
-                <ul>
-                    <li class="pizzafont"><a href="index.php">pizzaria</a></li>
-                </ul>
-            </div>
-            <div class="right">
-                <ul>
-                    <li><a href="aanmelden.php">inloggen</a></li>
-                    <li><a href="registratie.php">registreren</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-    <nav class="menu">
-        <ul class="pizzafont">
-
-            <li class="dropdown"> menu ˅
-                <div class="dropdown-content">
-                    <a href="index.php">eten</a>
-                    <a href="drinkmenu.php">drinken</a>
-                </div>
-            </li>
-            <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
-           
-            <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
-                        alt="winkelmandje"></a></li>
-        </ul>
-    </nav>
+ 
+<?=useheader()?>
 
     <h1 class="pizzafont">inloggen</h1>
     <div class="inlogpagina">

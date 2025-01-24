@@ -1,52 +1,18 @@
 <?php
 session_start();
+include 'include/head.php';
+include 'include/header.php';
+include 'include/sessionSwitch.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="STYLESHEET" href="pizza.css" type="text/css">
-    <title>privacyverklaring</title>
+<?=useHead()?>
 </head>
 
 <body>
-    <header>
-
-        <div class="header-container">
-            <div class="left">
-                <ul>
-                    <li class="pizzafont"><a href="index.php">pizzaria</a></li>
-                </ul>
-            </div>
-            <div class="right">
-                <ul>
-                <?php if(!isset($_SESSION['gebruiker'])): ?>
-                    <li><a href="aanmelden.php">Inloggen</a></li>
-                    <li><a href="registratie.php">Registreren</a></li>
-                    <?php endif; ?>
-                    <?php if(isset($_SESSION['gebruiker'])): ?>
-                    <li><a href="profiel.php"><img src="img/user.png" height="20" alt="profiel"></a></li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-    <nav class="menu">
-        <ul class="pizzafont">
-            <li class="dropdown"> menu ˅
-                <div class="dropdown-content">
-                    <a href="index.php">eten</a>
-                    <a href="drinkmenu.php">drinken</a>
-                </div>
-            </li>
-            <li> <a href="privacyverklaring.php">privacyverklaring</a></li>
-            <li class="imagelist"> <a href="winkelmandje.php"><img src="img/shopping-cart.png" height="20"
-                        alt="winkelmandje"></a></li>
-        </ul>
-    </nav>
+<?=useHeader()?>
 
 
     <h1>privacyverklaring</h1>
